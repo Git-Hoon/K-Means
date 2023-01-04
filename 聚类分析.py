@@ -23,11 +23,13 @@ class KMeans:
         self.dataset.append(Ys)
         return self.dataset
 
-    def distanceFormula(self, point1, point2):
+    @staticmethod
+    def distanceFormula(point1, point2):
         distance = math.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2)
         return distance
 
-    def getMin(self, compareList):
+    @staticmethod
+    def getMin(compareList):
         minNum = compareList[0]
         minIndex = 0
         for i in range(len(compareList)):
@@ -45,7 +47,7 @@ class KMeans:
             positon = random.randint(0, self.pointsAcount - 1)
             newDataset[2].append([newDataset[0][positon], newDataset[1][positon]])
             a += 1
-            print('起始中心点 ' + str(a) + ' 为： ( ' + str(newDataset[0][positon]) + ' , ' + str(newDataset[1][positon]) + ' )')
+            print('起始中心点 {} 为： ( {:.5f} , {:.5f} )'.format(str(a), newDataset[0][positon], newDataset[1][positon]))
         return newDataset
 
     def generateClusters(self, newDataset):
@@ -90,10 +92,11 @@ class KMeans:
             newStartPoint = [Xs/len(cluster), Ys/len(cluster)]
             newDataset[2].append(newStartPoint)
             a += 1
-            print('新的中心点 ' + str(a) + ' 为： ( ' + str(Xs/len(cluster)) + ' , ' + str(Ys/len(cluster)) + ' )')
+            print('新的中心点 {} 为： ( {:.5f} , {:.5f} )'.format(str(a), Xs/len(cluster), Ys/len(cluster)))
         return newDataset[2], clusterList
 
-    def randomColor(self):
+    @staticmethod
+    def randomColor():
         colorArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
         color = ''
         for i in range(6):
@@ -133,7 +136,7 @@ class KMeans:
         print() # 格式控制
         k = 0
         while k < self.k:
-            print('迭代完毕，最终中心点 ' + str(k+1) + ' 为： ( ' + str(newStartPointList[k][0]) + ' , ' + str(newStartPointList[k][1]) + ' )')
+            print('迭代完毕，最终中心点 {} 为： ( {:.5f} , {:.5f} )'.format(str(k+1), newStartPointList[k][0], newStartPointList[k][1]))
             k += 1
 
         endTime = time.time()
